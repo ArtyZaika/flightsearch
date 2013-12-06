@@ -33,6 +33,4 @@ function AirportCodeDAO(db){
 
 };
 
-AirportCodeDAO.prototype = DAO;
-
 module.exports = AirportCodeDAO;

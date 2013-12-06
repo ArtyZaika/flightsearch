@@ -1,6 +1,6 @@
 var AirlineCodeParser = require('./airlinecode.parser')
   ,AirportCodeParser = require('./airportcode.parser')
-  ,FlightstatsParser = require('./flightstats.parser')  ;
+  ,FlightstatsParser = require('./flightstats.parser');
 
 function HTMLParser(){
 

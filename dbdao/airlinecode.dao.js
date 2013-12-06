@@ -31,6 +31,4 @@ function AirlineCodeDAO(db){
 
 };
 
-AirlineCodeDAO.prototype = DAO;
-
 module.exports = AirlineCodeDAO;

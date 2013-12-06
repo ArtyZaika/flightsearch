@@ -57,12 +57,4 @@ function AirlineCodeParser(){
 
 };
 
-//Must implement abstract method from HTMLParser
-//TODO: Investigate inheritance here!!!!
-AirlineCodeParser.prototype = HTMLParser;
-//util.inherits(AirlineCodeParser, HTMLParser);
-
-
-
-
 module.exports = AirlineCodeParser;

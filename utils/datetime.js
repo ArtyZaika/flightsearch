@@ -23,7 +23,7 @@ function DataTimeUtils(){
         return that.dateStringFormat(prevDate);
     };
 
-    /*
+    /* //TODO: Outdated function!!!
      * Returns Date-Time slots for period +12/-12 hrs counting from the present hour.
      * Suppose time of searching is 17.00, Date-TIme slots returned:
      * {15:"2013-01-05", 18:"2013-01-05", 21:"2013-01-05", 0:"2013-01-06", 12:"2013-01-05", 9:"2013-01-05", 6:"2013-01-05"}

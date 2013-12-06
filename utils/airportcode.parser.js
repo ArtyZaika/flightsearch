@@ -90,7 +90,7 @@ function AirportCodeParser(){
             var reg = /^[A-z0-9]/g;
             var matched = reg.test(s);
             if (!matched) {
-                console.log("Not all values were parsed properly:" + s);
+                //console.log("Not all values were parsed properly:" + s);
             }
             return matched;
         }
@@ -104,9 +104,5 @@ function AirportCodeParser(){
     };
 
 };
-
-//Must implement abstract method from HTMLParser
-//TODO: Investigate inheritance here!!!!
-AirportCodeParser.prototype = HTMLParser;
 
 module.exports = AirportCodeParser;

@@ -19,7 +19,7 @@ function FlightstatsParser(){
         //var rawHtml = fs.readFileSync('./test_data/test_full.html', 'utf8');
 
         var schedules = [];
-        var skippedTags = {b:"b",  tr: "tr", table: "table", tbody: "tbody"}; //br:"br",
+        var skippedTags = {b:"b",  tr: "tr", table: "table", tbody: "tbody"};
 
         var $ = cheerio.load(rawHtml);
 
@@ -86,34 +86,24 @@ function FlightstatsParser(){
               return tempName;
           }
           //For common case: "<td class='border1'><a href='../united_states.htm'>USA</a></td>"
-          return parseChildForString(element.children[0]);
+          return parseCodeshares(element);
       }
 
       function parseCodeshares(child) {
           var tempString = '';
-
-          if (child.type == "tag" && child.name == "span") {
-              tempString += "<span class='" + child.attribs.class + "'>&nbsp;</span>"
-          } else if (child.type == "tag" && child.name == "br") {
-              tempString += "<br/>";
-          } else {
-              tempString += parseChildForString(child);
+          if (child) {
+              if (child.type == "tag" && child.name == "span") {
+                  tempString += "<span class='" + child.attribs.class + "'>";
+                  tempString += (child.children) ? child.children[0].data : "&nbsp;";
+                  tempString += "</span>";
+              } else if (child.type == "tag" && child.name == "br") {
+                  tempString += "<br/>";
+              } else {
+                  tempString += (child.children) ? parseCodeshares(child.children[0]) : parseChildForString(child);
+              }
           }
           return tempString;
       }
-
-      /*
-      * Should parse all children for <a> tag
-      * */
-      /*function shouldParseChildrenForString(children){
-          for(var i=0; i< children.length; i++){
-              var child = children[i];
-              if(child.type == "tag" && child.name == "a"){
-                    return true;
-              }
-          }
-          return false;
-      } */
 
       function parseChildForString(child) {
           if (child && !(child.name in skippedTags)) {
@@ -140,17 +130,10 @@ function FlightstatsParser(){
       function isString(value){
           return (typeof value == 'string' || value instanceof String);
       }
-
+      console.log(schedules);
       callback(schedules);
     };
 
-
-
-
 };
-
-//Must implement abstract method from HTMLParser
-//TODO: Investigate inheritance here!!!!
-FlightstatsParser.prototype = HTMLParser;
 
 module.exports = FlightstatsParser;
