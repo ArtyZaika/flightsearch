@@ -1,0 +1,102 @@
+doctype 5
+html(lang='en')
+head
+    meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='description', content='')
+        meta(name='author', content='')
+        meta(name='copyright', content='Copyright (c) 2013 Artem Zaika')
+        title Flights stat Search
+    //
+       Bootstrap core CSS
+    link(href='css/bootstrap.css', rel='stylesheet')
+    link(href='css/sticky-footer-navbar.css', rel='stylesheet')
+    link(href='css/commonBundle.css', rel='stylesheet')
+body
+    #wrap
+        .navbar.navbar-inverse.navbar-fixed-top
+            .container
+                .navbar-header
+                    button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='#') OneTwoTrip
+                .collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        li.active
+                            a(href='#') Home
+                        li
+                            a(href='#') About
+                        li
+                            a(href='#') Contact
+        .container
+            .row
+                .col-lg-12
+                    .row
+                        #forms.panel.panel-default
+                            .panel-heading
+                                legend Flight Status
+                            form#search_form.form-horizontal.col-lg-12(action='',method='post')
+                                hr
+                                //input(name="airportQueryDate", type="hidden", value="2013-12-04", id="flightStatusByAirport_airportQueryDate")
+                                //input(name="airport", type="hidden", value="(KBP) Kiev/Kyiv - Borispol Airport", id="flightStatusByAirport_airport")
+                                //input(name="airportQueryTime", type="hidden", value="12", id="flightStatusByAirport_airportQueryTime")
+                                //input(name="airportQueryType", type="hidden", value="0", id="flightStatusByAirport_airportQueryType")
+                                //input(name="queryNext", type="hidden", value="false", id="flightStatusByAirport_queryNext")
+                                //input(name="queryPrevious", type="hidden", value="false", id="flightStatusByAirport_queryPrevious")
+                                //input(name="sortField", type="hidden", value="3", id="flightStatusByAirport_sortField")
+                                fieldset
+                                    .form-group
+                                        .row
+                                            .col-lg-3
+                                                label Airport
+                                            .col-lg-3
+                                                label Airline(optional)
+                                            .col-lg-3
+                                            .col-lg-3
+                                        .row
+                                            #mandatory.col-lg-3
+                                                input#airports_search.form-control(type="text")
+                                            .col-lg-3
+                                                input#airlines_search.form-control(type="text")
+                                            .col-lg-2
+                                                label.radio-inline
+                                                    input(type="radio", name="radioGroup", id="arrive", value="0", checked)
+                                                label Departures
+                                            .col-lg-2
+                                                label.radio-inline
+                                                    input(type="radio", name="radioGroup", id="depart", value="1")
+                                                label Arrivals
+                                            .col-lg-2
+                                                .input-group-btn
+                                                    button#search.btn.btn-primary
+                                                        i.glyphicon.glyphicon-search
+                                                            strong Search
+
+            .row
+                .col-lg-12
+                    #alert_process.alert.alert-danger(style="display: none")
+                        strong Processing ...
+                    #alert_nothing.alert.alert-info(style="display: none")
+                        strong Nothing was found for this search
+                    #alert_done.alert.alert-success(style="display: none")
+                        strong Done!
+                        &nbsp; Flight statistics was successfully found.
+
+
+            .row
+                #content.col-lg-12
+
+
+
+    #footer
+        .container
+            p.text-muted.credit Developed by &nbsp;
+                strong
+                    a(href='http://facebook.com/artem.zaika') Artem Zaika
+
+script(src='//code.jquery.com/jquery-1.10.2.min.js')
+script(src='//code.jquery.com/ui/1.10.3/jquery-ui.js')
+script(src='js/bootstrap.min.js')
+script(src="js/main.js")
