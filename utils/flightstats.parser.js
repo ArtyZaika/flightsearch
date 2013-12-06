@@ -130,7 +130,7 @@ function FlightstatsParser(){
       function isString(value){
           return (typeof value == 'string' || value instanceof String);
       }
-      console.log(schedules);
+      //console.log(schedules);
       callback(schedules);
     };
 
