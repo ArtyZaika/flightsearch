@@ -21,7 +21,9 @@ function AirlineCodeDAO(db){
     this.findByCode = function (key, callback) {
         var reqExpVal = new RegExp("^" + key.toUpperCase());
 
-        airlnCd.find({$or: [{icao:{$regex: reqExpVal, $options: 'i'}}, {iata:{$regex: reqExpVal, $options: 'i'}}]}).toArray(function (err, items) {
+        airlnCd.find({$or: [{icao:{$regex: reqExpVal, $options: 'i'}},
+            {iata:{$regex: reqExpVal, $options: 'i'}},
+            {name:{$regex: reqExpVal, $options: 'i'}}]}).toArray(function (err, items) {
             if (err) {
                 callback(err);
             }

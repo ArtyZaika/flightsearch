@@ -20,13 +20,19 @@ function AirportCodeDAO(db){
     this.findByCode = function (key, callback) {
         var reqExpVal = new RegExp("^" + key.toUpperCase());
 
-        airports.find({code:{$regex: reqExpVal, $options: 'i'}}).toArray(function (err, items) {
+        airports.find({$or: [{code:{$regex: reqExpVal, $options: 'i'}},
+            {city:{$regex: reqExpVal, $options: 'i'}},
+            {country:{$regex: reqExpVal, $options: 'i'}},
+            {airport:{$regex: reqExpVal, $options: 'i'}}]}).toArray(function (err, items) {
             if (err) {
                 callback(err);
             }
             callback(err, items);
         });
     }
+
+
+
 
 
 
