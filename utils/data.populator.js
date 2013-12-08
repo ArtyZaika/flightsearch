@@ -1,5 +1,5 @@
 var http = require('http')
-    , HTMLParser = require('../utils/htmlparser')
+    , HTMLParser = require('./../parsers/htmlparser')
     , request = require('request');
 
 

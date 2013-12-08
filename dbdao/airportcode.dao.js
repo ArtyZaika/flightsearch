@@ -1,4 +1,5 @@
-var DAO = require('./dao');
+var DAOAbstract = require('./dao.abstract')
+    , sys = require('sys');
 
 function AirportCodeDAO(db){
     var airports = db.collection("airports");
@@ -16,6 +17,7 @@ function AirportCodeDAO(db){
             }
         });
     };
+
 
     this.findByCode = function (key, callback) {
         var reqExpVal = new RegExp("^" + key.toUpperCase());
@@ -35,8 +37,8 @@ function AirportCodeDAO(db){
 
 
 
-
-
 };
+
+sys.inherits(AirportCodeDAO, DAOAbstract);
 
 module.exports = AirportCodeDAO;

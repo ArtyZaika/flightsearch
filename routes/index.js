@@ -1,4 +1,4 @@
-var DataPopulator = require('./data.populator.js')
+var DataPopulator = require('./../utils/data.populator.js')
     , DAO = require('../dbdao/dao')
     , request = require('request')
     , DateTimeUtils = require('../utils/datetime');

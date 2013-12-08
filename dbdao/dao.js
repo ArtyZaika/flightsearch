@@ -3,14 +3,6 @@ var AirlineCodeDAO = require('./airlinecode.dao')
 
 function DAO(){
 
-    this.insertCode = function(data, callback){
-        throw "THis method is abstract and Must be implemented!!!";
-    };
-
-    this.findByCode = function(key, callback){
-        throw "THis method is abstract and Must be implemented!!!";
-    };
-
     this.getDAO = function(db, daoType){
         if( daoType === "airline" ){
             return new AirlineCodeDAO(db);
@@ -18,7 +10,6 @@ function DAO(){
             return new AirportCodeDAO(db);
         }
     }
-
 }
 
 module.exports = DAO;

@@ -1,6 +1,8 @@
-var HTMLParser = require('./htmlparser')
-    ,cheerio = require('cheerio')
-    ,util = require('util');
+var cheerio = require('cheerio')
+    ,util = require('util')
+    ,sys = require('sys')
+    ,AbstractParser = require('./parser.abstract');
+
 
 function AirlineCodeParser(){
 
@@ -44,10 +46,6 @@ function AirlineCodeParser(){
         callback(airlineCodes);
     };
 
-    this.hasChildren = function(element){
-        return element.children && element.children.length > 0;
-    };
-
     this.getChildData = function (element) {
         if (element.children && element.children.length > 0) {
             return element.children[0].data;
@@ -56,5 +54,7 @@ function AirlineCodeParser(){
     };
 
 };
+
+sys.inherits(AirlineCodeParser, AbstractParser);
 
 module.exports = AirlineCodeParser;

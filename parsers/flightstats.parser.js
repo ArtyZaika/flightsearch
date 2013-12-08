@@ -1,7 +1,8 @@
-var HTMLParser = require('./htmlparser')
-    ,cheerio = require('cheerio')
+var  cheerio = require('cheerio')
     ,fs = require('fs')
-    ,DateTimeUtils = require('./datetime');
+    ,DateTimeUtils = require('./../utils/datetime')
+    ,sys = require('sys')
+    ,AbstractParser = require('./parser.abstract');
 
 function FlightstatsParser(){
     /*
@@ -15,6 +16,8 @@ function FlightstatsParser(){
      * */
     var dateTimeUtils = new DateTimeUtils();
 
+    var that = this;
+
   this.parseCodesPageToPopulate = function(rawHtml, callback){
         //var rawHtml = fs.readFileSync('./test_data/test_full.html', 'utf8');
 
@@ -22,8 +25,6 @@ function FlightstatsParser(){
         var skippedTags = {b:"b",  tr: "tr", table: "table", tbody: "tbody"};
 
         var $ = cheerio.load(rawHtml);
-
-
 
         $("table.tableListingTable>tr").each(function(index, trElem) {
             //Ignore all table headers
@@ -60,7 +61,7 @@ function FlightstatsParser(){
        * */
       function shouldBeParsed(tdValue) {
           var tdData = parseComplexCell(tdValue);
-          if (isString(tdData)) {
+          if (that.isString(tdData)) {
               if(tdValue.name == "td"){
                   if(tdData.length == 0){
                       return ((typeof tdValue.attribs.nowrap != 'undefined') && tdValue.attribs.nowrap.length >= 0);
@@ -108,12 +109,12 @@ function FlightstatsParser(){
       function parseChildForString(child) {
           if (child && !(child.name in skippedTags)) {
               var tempVal = child.data;
-              if (isString(tempVal)) {
+              if (that.isString(tempVal)) {
                   return tempVal;
               } else {
                   try {
                       tempVal = child.children[0].data;
-                      if(!isString(tempVal)){
+                      if(!that.isString(tempVal)){
                           //continue to parse until find all text info of children nodes
                           return parseComplexCell(child.children[0]);
                       }
@@ -126,14 +127,12 @@ function FlightstatsParser(){
           }
           return "";
       }
-
-      function isString(value){
-          return (typeof value == 'string' || value instanceof String);
-      }
       //console.log(schedules);
       callback(schedules);
     };
 
 };
+
+sys.inherits(FlightstatsParser, AbstractParser);
 
 module.exports = FlightstatsParser;

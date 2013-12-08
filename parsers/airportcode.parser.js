@@ -1,7 +1,10 @@
-var HTMLParser = require('./htmlparser')
-    ,cheerio = require('cheerio');
+var cheerio = require('cheerio')
+    ,sys = require('sys')
+    ,AbstractParser = require('./parser.abstract');
 
 function AirportCodeParser(){
+
+    var that = this;
 
     this.parseCodesPageToPopulate = function(rawHtml, callback){
         var airportCodes = [];
@@ -42,7 +45,7 @@ function AirportCodeParser(){
         function shouldBeParsed(tdValue) {
             var tdData = parseSimpleCell(tdValue);
             if (typeof tdData == 'string' || tdData instanceof String) {
-                return (tdData.length > 0 && tdValue.name == "td" && isAlphaNum(tdData));
+                return (tdData.length > 0 && tdValue.name == "td" && that.isAlphaNum(tdData));
             }
             return false;
         }
@@ -73,10 +76,10 @@ function AirportCodeParser(){
             if (child && !(child.name in skippedTags)) {
                 var tempVal = child.data;
                 if (typeof tempVal == 'string' || tempVal instanceof String) {
-                    return removeWhitespaces(tempVal);
+                    return that.removeWhitespaces(tempVal);
                 } else {
                     try {
-                       return removeWhitespaces(child.children[0].data);
+                       return that.removeWhitespaces(child.children[0].data);
                     } catch(err){
                         console.log(err);
                         return 'EMPTY';
@@ -86,23 +89,11 @@ function AirportCodeParser(){
             return "";
         }
 
-        function isAlphaNum(s) {
-            var reg = /^[A-z0-9]/g;
-            var matched = reg.test(s);
-            if (!matched) {
-                //console.log("Not all values were parsed properly:" + s);
-            }
-            return matched;
-        }
-
-        //Remove redundant whitespace at the beginning of the string
-        function removeWhitespaces(str){
-            return new String(str).replace(/\s+/, '');
-        }
-
         callback(airportCodes);
     };
 
 };
+
+sys.inherits(AirportCodeParser, AbstractParser);
 
 module.exports = AirportCodeParser;

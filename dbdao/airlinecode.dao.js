@@ -1,4 +1,5 @@
-var DAO = require('./dao');
+var DAOAbstract = require('./dao.abstract')
+    , sys = require('sys')
 
 function AirlineCodeDAO(db){
 
@@ -32,5 +33,7 @@ function AirlineCodeDAO(db){
     }
 
 };
+
+sys.inherits(AirlineCodeDAO, DAOAbstract);
 
 module.exports = AirlineCodeDAO;

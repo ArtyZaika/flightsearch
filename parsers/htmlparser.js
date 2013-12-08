@@ -1,13 +1,8 @@
-var AirlineCodeParser = require('./airlinecode.parser')
-  ,AirportCodeParser = require('./airportcode.parser')
-  ,FlightstatsParser = require('./flightstats.parser');
+var AirlineCodeParser = require('./airlinecode.parser.js')
+  ,AirportCodeParser = require('./airportcode.parser.js')
+  ,FlightstatsParser = require('./flightstats.parser.js');
 
 function HTMLParser(){
-
-    this.parseCodesPageToPopulate = function(rawHtml, callback){
-        throw "This method is abstract and Must be populated!!!";
-    };
-
     this.getParser = function (paserType) {
 
         switch (paserType) {
